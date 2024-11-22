@@ -7532,12 +7532,12 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [199]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -7551,21 +7551,9 @@ a.anchor-link {
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
 <span class="kn">from</span> <span class="nn">services.functions</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">tiktoken</span>
+<span class="kn">from</span> <span class="nn">rouge</span> <span class="kn">import</span> <span class="n">Rouge</span>
+<span class="kn">from</span> <span class="nn">sacrebleu.metrics</span> <span class="kn">import</span> <span class="n">BLEU</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/Users/pedromonteiro/Library/Mobile Documents/com~apple~CloudDocs/Faculdade/promptClass/TP3/.venv/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre>
 </div>
 </div>
 </div>
@@ -9838,10 +9826,429 @@ Name: proportion, dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [174]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">resumo</span> <span class="o">=</span> <span class="s2">""""</span>
+
+<span class="s2">UM ladrão se aproxuma da caso do Homer e abre a porta. O cachorro reage mas é iludido com uma salsicha. </span>
+<span class="s2">Homer também é iludido por uma salsicha.</span>
+<span class="s2">O ladrão rouba vários objetos da casa e vai embora, saxofone, colar, coleção de selos e tv portátil.</span>
+<span class="s2">Todos na casa reclamam do roubo.</span>
+<span class="s2">O ladrão deixou um cartão  dizendo que você foi roubado pelo gatuno de springfield.</span>
+<span class="s2">Diversas pessoas foram roubadas na cidade.</span>
+<span class="s2">Homer liga para a polícia para reportar o roubo.</span>
+<span class="s2">Os roubos são noticiados na tv.</span>
+<span class="s2">A polícia encontra o lenço do ladrão em uma das casas</span>
+
+<span class="s2">As pessoas da cidade começam a se proteger contratando sistemas de segurança para suas casas.</span>
+<span class="s2">O pai do Homer se assusta com um colega achando que era um ladrão</span>
+<span class="s2">Homer conversa com a família sobre as novas regras de seguranca</span>
+<span class="s2">Homer da um vaso para Lisa em substituicao ao saxesofone roubado</span>
+<span class="s2">O ladrão ataca novamente.</span>
+<span class="s2">Os cidadãos se reúnem para que o Flanders lidere a segurança da cidade.</span>
+<span class="s2">Os cidadãos escolhem o Homer para a tarefa também uma vez que ele é muito impulsivo.</span>
+<span class="s2">Pai do Homer quer participar também mas é rejeitado por estar muito velho.</span>
+<span class="s2">Os cidadão se armam e criam códigos para se comunicarem.</span>
+
+<span class="s2">Homer busca comprar mais armas para a segurança da cidade.</span>
+<span class="s2">Homer empresta um megafone de bart e passa a patruhar a cidade impondo um toque de recolher e regras de segurança</span>
+<span class="s2">com certa truculência.</span>
+<span class="s2">Homer conta a familia durante o jantar sobre a patrulha.</span>
+<span class="s2">Lisa questiona quem vigia os vigilantes e quais os resultados obtidos.</span>
+<span class="s2">Homer é questionado por um jornalista sobre as ações dos vigilantes e responde que as estatísticas mentem.</span>
+<span class="s2">O programa do jornalista recebe uma ligação do gatuno de springfield que desafia Homer.</span>
+<span class="s2">O ladrão afirma que irá assaltar o museu de springfield e homer diz que irá protegê-lo</span>
+
+<span class="s2">Homer e seus vigilantes se posicionam para proteger o museu.</span>
+<span class="s2">Homer fica aguardando o ladrão no museu mas sai para impedir criancas de beberem cervejas.</span>
+<span class="s2">O ladrão chega e entra no museu, desliga o alarme e rouba um zircónio (diamante).</span>
+<span class="s2">A população da cidade critica e humilha Homer por não ter protegido o museu.</span>
+<span class="s2">O pai do Homer chega na casa do simpsons e diz que sabe quem é o ladrão.</span>
+<span class="s2">Pai do Homer diz que o ladrão mora no retiro dos idosos e chama-se Molloys.</span>
+<span class="s2">Pai do Homer diz que suspeito do ladrão por causa dos tenis e do modo de andar e que ele tem um zircónio.</span>
+<span class="s2">A população de springfield vai até o retiro e encontra o zircónio.</span>
+<span class="s2">Homer agradece o pai e diz que ele é um herói.</span>
+
+<span class="s2">O ladrão devolve tudo o que roubou e pede desculpas e diz que a cidade roubou o coração dele.</span>
+<span class="s2">A polícia chega e prende o ladrão.</span>
+<span class="s2">Ao ser questionado o ladrão diz que o dinheiro que roubou está enterrado em springfield debaixo de um grande T.</span>
+<span class="s2">A polícia e homer e toda a cidade vão atrás do dinheiro mas não sabem aonde procurar e pedem mais informações</span>
+<span class="s2">ao ladrão.</span>
+<span class="s2">O ladrão dá mais algumas dicas e todos saem a procura do dinheiro.</span>
+<span class="s2">A população encontra uma maleta que traz um bilhete.</span>
+<span class="s2">O bilhete diz que não há tesouro e que o ladrão usou o tempo para fugir da cadeia.</span>
+<span class="s2">O episodio termina com todos ignorando o bilhete e ainda cavando para encontrar o tesouro.</span>
+<span class="s2">"""</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [175]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">resumo</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[175]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>564</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Quest%C3%A3o-8">Questão 8<a class="anchor-link" href="#Quest%C3%A3o-8">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Parte-1">Parte 1<a class="anchor-link" href="#Parte-1">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [184]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">'line'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"Espisode "</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">'episode_id'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">' | '</span> <span class="o">+</span> 
+                <span class="n">data</span><span class="p">[</span><span class="s1">'location_normalized_name'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">', '</span> <span class="o">+</span> 
+                <span class="n">data</span><span class="p">[</span><span class="s1">'character_normalized_name'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">' said: '</span> <span class="o">+</span> 
+                <span class="n">data</span><span class="p">[</span><span class="s1">'normalized_text'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [189]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">summary_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
+
+<span class="s2">You are an editor assistant from the "The Simpsons" show.</span>
+<span class="s2">You will receive the subtitles from real episodes in the format:</span>
+<span class="s2">&lt;location&gt;, &lt;character&gt; said: &lt;character line&gt;</span>
+
+<span class="s2">You must create a summary of the episode, pointing out the most</span>
+<span class="s2">relevant information and key players in the story. Bare in mind</span>
+<span class="s2">that the summary must describe how the episode started, which key</span>
+<span class="s2">points are relevant along the story and its gran finale.</span>
+<span class="s2">"""</span>
+
+<span class="n">episode_season</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">episode_id</span> <span class="o">=</span> <span class="mi">92</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">episode_season</span> <span class="o">==</span> <span class="n">episode_season</span><span class="p">)</span> <span class="o">&amp;</span>
+          <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">episode_id</span> <span class="o">==</span> <span class="n">episode_id</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'number'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">'normalized_text'</span><span class="p">)</span>
+
+<span class="n">episode_summarizer</span> <span class="o">=</span> <span class="n">ChunkSummary</span><span class="p">(</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">"gemini-1.5-flash"</span><span class="p">,</span>
+    <span class="n">apikey</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">],</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="s1">'line'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">window_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">overlap_size</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="p">)</span>
+
+<span class="n">episode_summary</span> <span class="o">=</span> <span class="n">episode_summarizer</span><span class="o">.</span><span class="n">summarize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Summarizing text
+Summarizing chunk 1 from 4
+Summarizing chunk 2 from 4
+Summarizing chunk 3 from 4
+Summarizing chunk 4 from 4
+Final summarization
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [190]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">episode_summary</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[190]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>'```json\n{\n  "summary": "The episode revolves around a series of interconnected events stemming from a cat burglar\'s spree in Springfield.  It begins with the theft of various items, including Lisa\'s saxophone, prompting a city-wide panic fueled by Kent Brockman\'s sensationalist reporting and Chief Wiggum\'s inept investigation.  Simultaneously, Homer, spurred by a misguided sense of civic duty, forms a bumbling vigilante group with Moe, Skinner, and Barney, whose heavy-handed tactics cause more chaos than they solve.  This group\'s antics, including confiscating a saxophone (ironically, Lisa\'s), lead to a confrontation with the cat burglar, who taunts Homer by revealing he possesses Lisa\'s saxophone and plans to steal the world\'s largest cubic zirconia from the Springfield Museum.  Homer\'s subsequent attempt to guard the zirconia is comically inept, resulting in its theft.  The ensuing search for the gem involves the entire town, with Grampa Simpson unexpectedly playing a crucial role in identifying the culprit – Molloy, a resident of his retirement home – through astute observation.  Molloy is apprehended, but the episode ends with a final twist: Molloy\'s misleading clues send everyone on a fruitless treasure hunt, leaving Homer and the others digging in the park with nothing to show for their efforts.  The humor throughout the episode stems from the juxtaposition of Homer\'s incompetence and obliviousness with Grampa\'s unexpected brilliance, the absurdity of the vigilante group\'s actions, Wiggum\'s ineptitude, and the town\'s collective reaction to the series of events.  The episode concludes with the disbanding of Homer\'s vigilante group, the failure to recover the stolen items (except for those returned by Molloy), and the lingering sense of chaos and absurdity that permeates Springfield.  Key players include Homer, Grampa Simpson, Chief Wiggum, Molloy, Lisa, the cat burglar, Moe, Skinner, Barney, and Kent Brockman.  The episode\'s overarching theme is the comedic portrayal of incompetence, chaos, and the unexpected consequences of well-intentioned (but ultimately disastrous) actions."\n}\n```\n'</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [191]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">episode_summary</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">episode_summary</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"```json</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">```"</span><span class="p">,</span><span class="s1">''</span><span class="p">))</span>
+<span class="n">episode_summary</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[191]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'summary': "The episode revolves around a series of interconnected events stemming from a cat burglar's spree in Springfield.  It begins with the theft of various items, including Lisa's saxophone, prompting a city-wide panic fueled by Kent Brockman's sensationalist reporting and Chief Wiggum's inept investigation.  Simultaneously, Homer, spurred by a misguided sense of civic duty, forms a bumbling vigilante group with Moe, Skinner, and Barney, whose heavy-handed tactics cause more chaos than they solve.  This group's antics, including confiscating a saxophone (ironically, Lisa's), lead to a confrontation with the cat burglar, who taunts Homer by revealing he possesses Lisa's saxophone and plans to steal the world's largest cubic zirconia from the Springfield Museum.  Homer's subsequent attempt to guard the zirconia is comically inept, resulting in its theft.  The ensuing search for the gem involves the entire town, with Grampa Simpson unexpectedly playing a crucial role in identifying the culprit – Molloy, a resident of his retirement home – through astute observation.  Molloy is apprehended, but the episode ends with a final twist: Molloy's misleading clues send everyone on a fruitless treasure hunt, leaving Homer and the others digging in the park with nothing to show for their efforts.  The humor throughout the episode stems from the juxtaposition of Homer's incompetence and obliviousness with Grampa's unexpected brilliance, the absurdity of the vigilante group's actions, Wiggum's ineptitude, and the town's collective reaction to the series of events.  The episode concludes with the disbanding of Homer's vigilante group, the failure to recover the stolen items (except for those returned by Molloy), and the lingering sense of chaos and absurdity that permeates Springfield.  Key players include Homer, Grampa Simpson, Chief Wiggum, Molloy, Lisa, the cat burglar, Moe, Skinner, Barney, and Kent Brockman.  The episode's overarching theme is the comedic portrayal of incompetence, chaos, and the unexpected consequences of well-intentioned (but ultimately disastrous) actions."}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Parte-2">Parte 2<a class="anchor-link" href="#Parte-2">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [214]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">summary</span> <span class="ow">in</span> <span class="n">episode_summarizer</span><span class="o">.</span><span class="n">chunk_summaries</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">summary</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"```json</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">```"</span><span class="p">,</span><span class="s1">''</span><span class="p">)][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>{
+  "summary": "The Simpsons' home is robbed by the Springfield Cat Burglar, who steals Lisa's saxophone, Bart's stamp collection, Marge's necklace, and various items from other Springfield residents.  Homer's nonchalant reaction to the robbery contrasts with the family's distress, particularly Lisa's emotional attachment to her saxophone.  Chief Wiggum's inept investigation leads to a city-wide panic, fueled by Kent Brockman's sensationalist reporting.  Professor Frink's high-tech security system demonstration backfires hilariously.  The culprit is revealed to be Grandpa Simpson, who was stealing to fund his retirement home activities.  The episode culminates in the formation of a neighborhood watch led by Homer, who, despite his incompetence, is chosen due to his perceived decisiveness.  The episode is filled with classic Simpsons humor, including Homer's obliviousness, Wiggum's ineptitude, and the absurdity of the neighborhood watch's formation.  Lisa's emotional distress over losing her saxophone serves as a poignant counterpoint to the overall comedic tone."
+}
+
+{
+  "summary": "The episode starts with Homer dismissing Grampa from a vigilante group he's forming with Moe, Skinner, and Barney.  The group's mission is to clean up Springfield, which involves heavy-handed tactics and causing more problems than they solve.  Their antics include confiscating a saxophone from a student and harassing people for minor infractions.  Homer's group gains notoriety, and he appears on a TV interview where he's confronted by the cat burglar he's supposed to be catching. The burglar taunts Homer by revealing he has Lisa's saxophone and plans to steal the world's largest cubic zirconia.  Homer vows to protect the museum, but falls asleep on duty (drunk).  The episode ends with Homer's vigilante group disbanding after Jimbo decides to go to law school, leaving Homer dejected and disillusioned.  The humor comes from the absurdity of Homer's vigilante group, their incompetent methods, and the ironic consequences of their actions. Key players include Homer, Moe, Skinner, Barney, Jimbo, and the cat burglar.  The episode's main plot revolves around Homer's failed attempt at being a vigilante and the unexpected consequences of his actions."
+}
+
+{
+  "summary": "The episode starts with Homer nervously guarding the Springfield Museum's cubic zirconia from a cat burglar, who ironically gives him a vague timeframe for the heist.  Homer's attempts at security are hilariously inept, involving a drunken stupor and ultimately failing to prevent the theft.  The ensuing chaos involves the whole town, with everyone searching for the missing gem.  Grampa Simpson, initially unhelpful, unexpectedly becomes the key to solving the mystery. Through a series of astute observations (Molloy's sneakers, unusual gait, and the zirconia on his coffee table), Grampa deduces that Molloy, a resident of his retirement home, is the culprit.  The climax sees Molloy apprehended, initially charming the crowd with his remorse and returning stolen goods, only to be arrested by Chief Wiggum, who takes a bribe from Mayor Quimby.  The final twist is Molloy's misleading clues about the location of his hidden loot, sending the entire town on a wild goose chase, leaving Homer and the others digging in the park with no treasure to be found. The episode is filled with classic Simpsons humor, featuring Homer's incompetence, Grampa's unexpected brilliance, and the town's collective absurdity in the face of a seemingly simple crime."
+}
+
+{
+  "summary": "The episode starts with Homer and Chief Wiggum leaving the Springfield Police Station.  Homer, however, is on a treasure hunt, convinced millions are buried under a 'big T'.  Molloy provides directions, adding to the chaotic energy.  The scene shifts to various locations with Barney making a random comment, a driver threatening a kid, and Kent Brockman's sensationalist reporting prompting Professor Frink to advise viewers to engage in cannibalism.  The search for the treasure leads to a park where Otto finds a piece of paper claimed by Homer, revealing it to be a false lead.  Mayor Quimby joins the digging frenzy, only to find nothing. The episode ends with the group trapped, with Homer suggesting they dig their way out, and Wiggum's exasperated 'dig up stupid' comment."
+}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Respostas:">Respostas:<a class="anchor-link" href="#Respostas:">¶</a></h3><ol>
+<li><p>Foram necessários 4 chuncks conforme células acima.</p>
+</li>
+<li><p>O resultado de cada um dos chucks registrados acima foi coerente com o episódio de forma geral, diferenciando-se do sumarizado por mim devido a inclusão do nome dos personagens e o registro de algumns sentimentos ou reações durante a sumarização. Durante o meu resumo, busquei relatar mais os fatos, todavia como no prompt solicitamos que o LLM relatasse as informações mais importantes, acredito que ele tenha considerado algumas reações de personagens como relevantes.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Quest%C3%A3o-9">Questão 9<a class="anchor-link" href="#Quest%C3%A3o-9">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Tradu%C3%A7%C3%A3o">Tradução<a class="anchor-link" href="#Tradu%C3%A7%C3%A3o">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [202]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">genai</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s2">"gemini-1.5-pro"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span>
+<span class="s2">Please translate this text to english: </span><span class="si">{</span><span class="n">resumo</span><span class="si">}</span>
+<span class="s2">"""</span><span class="p">)</span>
+<span class="n">translated_text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+<span class="n">translated_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[202]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>"A thief approaches Homer's house and opens the door. The dog reacts but is tricked with a sausage.\nHomer is also tricked with a sausage.\nThe thief steals several items from the house and leaves: a saxophone, a necklace, a stamp collection, and a portable TV.\nEveryone in the house complains about the robbery.\nThe thief left a card saying they were robbed by the Springfield Cat Burglar.\nSeveral people have been robbed in town.\nHomer calls the police to report the robbery.\nThe robberies are reported on TV.\nThe police find the thief's handkerchief in one of the houses.\n\nThe townspeople start protecting themselves by hiring security systems for their homes.\nHomer's father gets scared by a colleague, thinking he's a thief.\nHomer talks to the family about the new security rules.\nHomer gives Lisa a vase to replace the stolen saxophone.\nThe thief strikes again.\nThe citizens gather for Flanders to lead the town's security.\nThe citizens choose Homer for the task as well since he's very impulsive.\nHomer's father wants to participate too but is rejected for being too old.\nThe citizens arm themselves and create codes to communicate.\n\nHomer seeks to buy more weapons for the town's security.\nHomer borrows a megaphone from Bart and starts patrolling the town, imposing a curfew and safety rules rather forcefully.\nHomer tells the family about the patrol during dinner.\nLisa questions who watches the watchmen and what results they have achieved.\nHomer is questioned by a reporter about the vigilantes' actions and replies that statistics lie.\nThe reporter's program receives a call from the Springfield Cat Burglar, who challenges Homer.\nThe thief claims they will rob the Springfield Museum, and Homer says he will protect it.\n\nHomer and his vigilantes position themselves to protect the museum.\nHomer waits for the thief at the museum but leaves to stop some kids from drinking beer.\nThe thief arrives and enters the museum, disables the alarm, and steals a zircon (diamond).\nThe townspeople criticize and humiliate Homer for not protecting the museum.\nHomer's father arrives at the Simpsons' house and says he knows who the thief is.\nHomer's father says the thief lives in the retirement home and is named Molloy.\nHomer's father says he suspected the thief because of his sneakers and the way he walks and that he has a zircon.\nThe Springfield population goes to the retirement home and finds the zircon.\nHomer thanks his father and says he's a hero.\n\nThe thief returns everything they stole and apologizes, saying that the town stole their heart.\nThe police arrive and arrest the thief.\nWhen questioned, the thief says the stolen money is buried in Springfield under a big T.\nThe police, Homer, and the whole town go after the money but don't know where to look and ask the thief for more information.\nThe thief gives a few more clues, and everyone goes looking for the money.\nThe townspeople find a briefcase containing a note.\nThe note says there is no treasure and that the thief used the time to escape from jail.\nThe episode ends with everyone ignoring the note and still digging for the treasure.\n"</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="An%C3%A1lise-por-Chunck">Análise por Chunck<a class="anchor-link" href="#An%C3%A1lise-por-Chunck">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [208]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">my_chunk_1</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">"A thief approaches Homer's house and opens the door. The dog reacts but is tricked with a sausage.</span>
+<span class="se">\n</span><span class="s2">Homer is also tricked with a sausage.</span><span class="se">\n</span><span class="s2">The thief steals several items from the house and leaves: </span>
+<span class="s2">a saxophone, a necklace, a stamp collection, and a portable TV.</span><span class="se">\n</span><span class="s2">Everyone in the house complains </span>
+<span class="s2">about the robbery.</span><span class="se">\n</span><span class="s2">The thief left a card saying they were robbed by the Springfield Cat Burglar.</span>
+<span class="se">\n</span><span class="s2">Several people have been robbed in town.</span><span class="se">\n</span><span class="s2">Homer calls the police to report the robbery.</span><span class="se">\n</span><span class="s2">The </span>
+<span class="s2">robberies are reported on TV.</span><span class="se">\n</span><span class="s2">The police find the thief's handkerchief in one of the houses.</span><span class="se">\n\n</span>
+<span class="s2">The townspeople start protecting themselves by hiring security systems for their homes.</span><span class="se">\n</span>
+<span class="s2">Homer's father gets scared by a colleague, thinking he's a thief.</span><span class="se">\n</span><span class="s2">Homer talks to the family </span>
+<span class="s2">about the new security rules.</span><span class="se">\n</span><span class="s2">Homer gives Lisa a vase to replace the stolen saxophone.</span><span class="se">\n</span><span class="s2">The </span>
+<span class="s2">thief strikes again.</span><span class="se">\n</span><span class="s2">The citizens gather for Flanders to lead the town's security.</span><span class="se">\n</span><span class="s2">The </span>
+<span class="s2">citizens choose Homer for the task as well since he's very impulsive."""</span>
+
+<span class="n">my_chunk_2</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\n</span><span class="s2">Homer's father wants </span>
+<span class="s2">to participate too but is rejected for being too old.</span><span class="se">\n</span><span class="s2">The citizens arm themselves and create </span>
+<span class="s2">codes to communicate.</span><span class="se">\n\n</span><span class="s2">Homer seeks to buy more weapons for the town's security.</span><span class="se">\n</span><span class="s2">Homer borrows </span>
+<span class="s2">a megaphone from Bart and starts patrolling the town, imposing a curfew and safety rules rather </span>
+<span class="s2">forcefully.</span><span class="se">\n</span><span class="s2">Homer tells the family about the patrol during dinner.</span><span class="se">\n</span><span class="s2">Lisa questions who watches </span>
+<span class="s2">the watchmen and what results they have achieved.</span><span class="se">\n</span><span class="s2">Homer is questioned by a reporter about the </span>
+<span class="s2">vigilantes' actions and replies that statistics lie.</span><span class="se">\n</span><span class="s2">The reporter's program receives a call from </span>
+<span class="s2">the Springfield Cat Burglar, who challenges Homer.</span><span class="se">\n</span><span class="s2">The thief claims they will rob the Springfield </span>
+<span class="s2">Museum, and Homer says he will protect it.</span><span class="se">\n\n</span><span class="s2">Homer and his vigilantes position themselves to protect </span>
+<span class="s2">the museum.</span><span class="se">\n</span><span class="s2">"""</span>
+
+<span class="n">my_chunk_3</span> <span class="o">=</span> <span class="s2">"""Homer waits for the thief at the museum but leaves to stop some kids from drinking beer.</span>
+<span class="se">\n</span><span class="s2">The thief arrives and enters the museum, disables the alarm, and steals a zircon (diamond).</span><span class="se">\n</span><span class="s2">The </span>
+<span class="s2">townspeople criticize and humiliate Homer for not protecting the museum.</span><span class="se">\n</span><span class="s2">Homer's father arrives </span>
+<span class="s2">at the Simpsons' house and says he knows who the thief is.</span><span class="se">\n</span><span class="s2">Homer's father says the thief lives </span>
+<span class="s2">in the retirement home and is named Molloy.</span><span class="se">\n</span><span class="s2">Homer's father says he suspected the thief because </span>
+<span class="s2">of his sneakers and the way he walks and that he has a zircon.</span><span class="se">\n</span><span class="s2">The Springfield population goes </span>
+<span class="s2">to the retirement home and finds the zircon.</span><span class="se">\n</span><span class="s2">Homer thanks his father and says he's a hero.</span><span class="se">\n\n</span>
+<span class="s2">The thief returns everything they stole and apologizes, saying that the town stole their heart.</span><span class="se">\n</span>
+<span class="s2">The police arrive and arrest the thief.</span><span class="se">\n</span><span class="s2">When questioned, the thief says the stolen money </span>
+<span class="s2">is buried in Springfield under a big T."""</span>
+
+<span class="n">my_chunk_4</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\n</span><span class="s2">The police, Homer, and the whole town go after </span>
+<span class="s2">the money but don't know where to look and ask the thief for more information.</span><span class="se">\n</span><span class="s2">The thief </span>
+<span class="s2">gives a few more clues, and everyone goes looking for the money.</span><span class="se">\n</span><span class="s2">The townspeople find a </span>
+<span class="s2">briefcase containing a note.</span><span class="se">\n</span><span class="s2">The note says there is no treasure and that the thief used </span>
+<span class="s2">the time to escape from jail.</span><span class="se">\n</span><span class="s2">The episode ends with everyone ignoring the note and still </span>
+<span class="s2">digging for the treasure.</span><span class="se">\n</span><span class="s2">"</span>
+
+<span class="s2">"""</span>
 </pre></div>
 </div>
 </div>
@@ -9852,10 +10259,330 @@ Name: proportion, dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [215]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">summary_chunk_1</span> <span class="o">=</span>  <span class="s2">"""The Simpsons' home is robbed by the Springfield Cat Burglar, who steals Lisa's </span>
+<span class="s2">saxophone, Bart's stamp collection, Marge's necklace, and various items from other Springfield </span>
+<span class="s2">residents.  Homer's nonchalant reaction to the robbery contrasts with the family's distress, </span>
+<span class="s2">particularly Lisa's emotional attachment to her saxophone.  Chief Wiggum's inept investigation </span>
+<span class="s2">leads to a city-wide panic, fueled by Kent Brockman's sensationalist reporting.  Professor Frink's </span>
+<span class="s2">high-tech security system demonstration backfires hilariously.  The culprit is revealed to be Grandpa </span>
+<span class="s2">Simpson, who was stealing to fund his retirement home activities.  The episode culminates in the formation </span>
+<span class="s2">of a neighborhood watch led by Homer, who, despite his incompetence, is chosen due to his perceived </span>
+<span class="s2">decisiveness.  The episode is filled with classic Simpsons humor, including Homer's obliviousness, </span>
+<span class="s2">Wiggum's ineptitude, and the absurdity of the neighborhood watch's formation.  Lisa's emotional </span>
+<span class="s2">distress over losing her saxophone serves as a poignant counterpoint to the overall comedic tone."""</span>
+
+<span class="n">summary_chunk_2</span> <span class="o">=</span> <span class="s2">"""The episode starts with Homer dismissing Grampa from a vigilante group he's </span>
+<span class="s2">forming with Moe, Skinner, and Barney.  The group's mission is to clean up Springfield, which involves </span>
+<span class="s2">heavy-handed tactics and causing more problems than they solve.  Their antics include confiscating a </span>
+<span class="s2">saxophone from a student and harassing people for minor infractions.  Homer's group gains notoriety, </span>
+<span class="s2">and he appears on a TV interview where he's confronted by the cat burglar he's supposed to be catching. </span>
+<span class="s2">The burglar taunts Homer by revealing he has Lisa's saxophone and plans to steal the world's largest </span>
+<span class="s2">cubic zirconia.  Homer vows to protect the museum, but falls asleep on duty (drunk).  The episode ends </span>
+<span class="s2">with Homer's vigilante group disbanding after Jimbo decides to go to law school, leaving Homer </span>
+<span class="s2">dejected and disillusioned.  The humor comes from the absurdity of Homer's vigilante group, their </span>
+<span class="s2">incompetent methods, and the ironic consequences of their actions. Key players include Homer, Moe, </span>
+<span class="s2">Skinner, Barney, Jimbo, and the cat burglar.  The episode's main plot revolves around Homer's failed </span>
+<span class="s2">attempt at being a vigilante and the unexpected consequences of his actions."</span>
+<span class="s2">"""</span>
+<span class="n">summary_chunk_3</span> <span class="o">=</span>  <span class="s2">"""The episode starts with Homer nervously guarding the Springfield Museum's cubic zirconia </span>
+<span class="s2">from a cat burglar, who ironically gives him a vague timeframe for the heist.  Homer's attempts at security </span>
+<span class="s2">    are hilariously inept, involving a drunken stupor and ultimately failing to prevent the theft.  </span>
+<span class="s2">The ensuing chaos involves the whole town, with everyone searching for the missing gem.  Grampa Simpson,</span>
+<span class="s2">initially unhelpful, unexpectedly becomes the key to solving the mystery. Through a series of astute </span>
+<span class="s2">observations (Molloy's sneakers, unusual gait, and the zirconia on his coffee table), Grampa deduces </span>
+<span class="s2">that Molloy, a resident of his retirement home, is the culprit.  The climax sees Molloy </span>
+<span class="s2">apprehended, initially charming the crowd with his remorse and returning stolen goods, </span>
+<span class="s2">only to be arrested by Chief Wiggum, who takes a bribe from Mayor Quimby.  The final </span>
+<span class="s2">twist is Molloy's misleading clues about the location of his hidden loot, sending the </span>
+<span class="s2">entire town on a wild goose chase, leaving Homer and the others digging in the park </span>
+<span class="s2">with no treasure to be found. The episode is filled with classic Simpsons humor, </span>
+<span class="s2">featuring Homer's incompetence, Grampa's unexpected brilliance, and the town's </span>
+<span class="s2">collective absurdity in the face of a seemingly simple crime."""</span>
+
+<span class="n">summary_chunk_4</span> <span class="o">=</span> <span class="s2">"""The episode starts with Homer and Chief Wiggum leaving the Springfield Police Station.  </span>
+<span class="s2">Homer, however, is on a treasure hunt, convinced millions are buried under a 'big T'.  Molloy provides </span>
+<span class="s2">directions, adding to the chaotic energy.  The scene shifts to various locations with Barney making a </span>
+<span class="s2">random comment, a driver threatening a kid, and Kent Brockman's sensationalist reporting prompting </span>
+<span class="s2">Professor Frink to advise viewers to engage in cannibalism.  The search for the treasure leads to </span>
+<span class="s2">a park where Otto finds a piece of paper claimed by Homer, revealing it to be a false lead. </span>
+<span class="s2"> Mayor Quimby joins the digging frenzy, only to find nothing. The episode ends with the group trapped, </span>
+<span class="s2"> with Homer suggesting they dig their way out, and Wiggum's exasperated 'dig up stupid' comment."""</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [222]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">my_chunk</span><span class="p">,</span> <span class="n">summary_chunk</span> <span class="ow">in</span>  <span class="nb">zip</span><span class="p">([</span><span class="n">my_chunk_1</span><span class="p">,</span> <span class="n">my_chunk_2</span><span class="p">,</span> <span class="n">my_chunk_3</span><span class="p">,</span> <span class="n">my_chunk_4</span><span class="p">],</span> <span class="p">[</span><span class="n">summary_chunk_1</span><span class="p">,</span> <span class="n">summary_chunk_2</span><span class="p">,</span> <span class="n">summary_chunk_3</span><span class="p">,</span> <span class="n">summary_chunk_4</span><span class="p">]):</span>    
+    <span class="n">bleu_scorer</span> <span class="o">=</span> <span class="n">BLEU</span><span class="p">()</span>
+    <span class="n">rouge_scorer</span> <span class="o">=</span> <span class="n">Rouge</span><span class="p">()</span>
+
+    <span class="n">hypothesis</span> <span class="o">=</span> <span class="n">summary_chunk</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">my_chunk</span>
+
+    <span class="n">bleu_score</span> <span class="o">=</span> <span class="n">bleu_scorer</span><span class="o">.</span><span class="n">sentence_score</span><span class="p">(</span>
+        <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">reference</span><span class="p">],</span>
+    <span class="p">)</span>
+
+
+    <span class="n">rouge_score</span> <span class="o">=</span> <span class="n">rouge_scorer</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span>
+        <span class="n">hyps</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+        <span class="n">refs</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">""" </span>
+<span class="s2">          BLEU: </span><span class="si">{</span><span class="n">bleu_score</span><span class="o">.</span><span class="n">score</span><span class="o">/</span><span class="mi">100</span><span class="si">}</span><span class="s2">,</span>
+<span class="s2">          ROUGE-L-F: </span><span class="si">{</span><span class="n">rouge_score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s2">"f"</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span>
+<span class="s2">          ROUGE-L-R: </span><span class="si">{</span><span class="n">rouge_score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s1">'r'</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span>
+<span class="s2">          ROUGE-L-P: </span><span class="si">{</span><span class="n">rouge_score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s1">'p'</span><span class="p">]</span><span class="si">}</span><span class="s2">"""</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>It is recommended to enable `effective_order` for sentence-level BLEU.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>It is recommended to enable `effective_order` for sentence-level BLEU.
+It is recommended to enable `effective_order` for sentence-level BLEU.
+It is recommended to enable `effective_order` for sentence-level BLEU.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre> 
+          BLEU: 0.05964726282568864,
+          ROUGE-L-F: 0.19905212770153424, 
+          ROUGE-L-R: 0.2, 
+          ROUGE-L-P: 0.19811320754716982
+ 
+          BLEU: 0.028170728619909647,
+          ROUGE-L-F: 0.1730769181809358, 
+          ROUGE-L-R: 0.20224719101123595, 
+          ROUGE-L-P: 0.15126050420168066
+ 
+          BLEU: 0.014191296167402462,
+          ROUGE-L-F: 0.18099547042280065, 
+          ROUGE-L-R: 0.24096385542168675, 
+          ROUGE-L-P: 0.14492753623188406
+ 
+          BLEU: 0.0530216710122165,
+          ROUGE-L-F: 0.20270269818571962, 
+          ROUGE-L-R: 0.29411764705882354, 
+          ROUGE-L-P: 0.15463917525773196
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="An%C3%A1lise-do-Todo">Análise do Todo<a class="anchor-link" href="#An%C3%A1lise-do-Todo">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Bleu">Bleu<a class="anchor-link" href="#Bleu">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [204]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">episode_summary</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[204]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'summary': "The episode revolves around a series of interconnected events stemming from a cat burglar's spree in Springfield.  It begins with the theft of various items, including Lisa's saxophone, prompting a city-wide panic fueled by Kent Brockman's sensationalist reporting and Chief Wiggum's inept investigation.  Simultaneously, Homer, spurred by a misguided sense of civic duty, forms a bumbling vigilante group with Moe, Skinner, and Barney, whose heavy-handed tactics cause more chaos than they solve.  This group's antics, including confiscating a saxophone (ironically, Lisa's), lead to a confrontation with the cat burglar, who taunts Homer by revealing he possesses Lisa's saxophone and plans to steal the world's largest cubic zirconia from the Springfield Museum.  Homer's subsequent attempt to guard the zirconia is comically inept, resulting in its theft.  The ensuing search for the gem involves the entire town, with Grampa Simpson unexpectedly playing a crucial role in identifying the culprit – Molloy, a resident of his retirement home – through astute observation.  Molloy is apprehended, but the episode ends with a final twist: Molloy's misleading clues send everyone on a fruitless treasure hunt, leaving Homer and the others digging in the park with nothing to show for their efforts.  The humor throughout the episode stems from the juxtaposition of Homer's incompetence and obliviousness with Grampa's unexpected brilliance, the absurdity of the vigilante group's actions, Wiggum's ineptitude, and the town's collective reaction to the series of events.  The episode concludes with the disbanding of Homer's vigilante group, the failure to recover the stolen items (except for those returned by Molloy), and the lingering sense of chaos and absurdity that permeates Springfield.  Key players include Homer, Grampa Simpson, Chief Wiggum, Molloy, Lisa, the cat burglar, Moe, Skinner, Barney, and Kent Brockman.  The episode's overarching theme is the comedic portrayal of incompetence, chaos, and the unexpected consequences of well-intentioned (but ultimately disastrous) actions."}</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [205]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">bleu_scorer</span> <span class="o">=</span> <span class="n">BLEU</span><span class="p">()</span>
+
+<span class="n">hypothesis</span> <span class="o">=</span> <span class="n">episode_summary</span><span class="p">[</span><span class="s1">'summary'</span><span class="p">]</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="n">translated_text</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">bleu_scorer</span><span class="o">.</span><span class="n">sentence_score</span><span class="p">(</span>
+    <span class="n">hypothesis</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+    <span class="n">references</span><span class="o">=</span><span class="p">[</span><span class="n">reference</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">score</span><span class="o">.</span><span class="n">score</span><span class="o">/</span><span class="mi">100</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>It is recommended to enable `effective_order` for sentence-level BLEU.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[205]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>0.01694587137731335</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Rouge">Rouge<a class="anchor-link" href="#Rouge">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [206]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">rouge_scorer</span> <span class="o">=</span> <span class="n">Rouge</span><span class="p">()</span>
+
+<span class="n">hypothesis</span> <span class="o">=</span> <span class="n">episode_summary</span><span class="p">[</span><span class="s1">'summary'</span><span class="p">]</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="n">translated_text</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">rouge_scorer</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span>
+    <span class="n">hyps</span><span class="o">=</span><span class="n">hypothesis</span><span class="p">,</span>
+    <span class="n">refs</span><span class="o">=</span><span class="n">reference</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ROUGE-L-F'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s2">"f"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ROUGE-L-R'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s1">'r'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ROUGE-L-P'</span><span class="p">,</span> <span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"rouge-l"</span><span class="p">][</span><span class="s1">'p'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>ROUGE-L-F 0.16363635871735555
+ROUGE-L-R 0.14516129032258066
+ROUGE-L-P 0.1875
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Resposta">Resposta<a class="anchor-link" href="#Resposta">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Apesar de na minha leitura dos resumo eu ter achado que os mesmos estavam, de forma geral parecidos, as métricas BLEU e ROUGE não demonstraram isso, uma vez que tivemos um valor muito baixo para bleu e baixo para o rouge. Isso pode ter ocorrido devido a fatores como: (i) a escolha exata das palavras, uma vez que essas métricas são sensíveis a literalidade das palavras, podendo demonstrar dificuldade em compreender sinônimos e  (ii) ordem das frases/palavras no texto. Acredito que esse realmente tenha sido o motivo uma vez que pelos valores mostrados pelas métricas, os resultados estão consistentes pois os valores retornados são muito próximos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Quest%C3%A3o-10">Questão 10<a class="anchor-link" href="#Quest%C3%A3o-10">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [223]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">classification_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'./data/theSimpsons/classification.csv'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">';'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9866,12 +10593,615 @@ Name: proportion, dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [225]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Ler o resultado da análise de sentimento</span>
+<span class="n">chain_of_thoughts_1</span> <span class="o">=</span> <span class="s2">""" </span>
+
+<span class="s2">### Objetivo</span>
+<span class="s2">Carregar os resultados da análise de sentimento em um DataFrame para que possamos trabalhar com os </span>
+<span class="s2">dados.</span>
+
+<span class="s2">Prompt: " Forneça um código em python que leia os dados do seguinte diretório: ./data/theSimpsons/classification.csv</span>
+<span class="s2">e carregue os resultados da análise de sentimento em um DataFrame do pandas.</span>
+<span class="s2">"""</span>
+
+<span class="c1"># Calcular proporção</span>
+<span class="n">chain_of_thoughts_2</span> <span class="o">=</span> <span class="s2">""" </span>
+
+<span class="s2">### Objetivo</span>
+<span class="s2">Calcular a proporção de cada categoria de sentimento no DataFrame.</span>
+
+<span class="s2">Prompt: " Forneça um código em python que calcule a proporção de falas de cada categoria de sentimento no DataFrame. </span>
+<span class="s2">Use o método value_counts com a opção normalize=True para obter as proporções."</span>
+<span class="s2">"""</span>
+
+<span class="c1"># Criar aplicação com grafico pizza</span>
+<span class="n">chain_of_thoughts_3</span> <span class="o">=</span> <span class="s2">""" </span>
+
+<span class="s2">### Objetivo</span>
+<span class="s2">Criar uma aplicação Streamlit que exibe um gráfico de </span>
+<span class="s2">pizza mostrando a proporção de falas de cada categoria de sentimento.</span>
+
+<span class="s2">Prompt: " Forneça um código em python que crie uma aplicação Streamlit que exibe um gráfico de pizza mostrando a </span>
+<span class="s2">proporção de falas de cada categoria de sentimento. </span>
+<span class="s2">Use a biblioteca matplotlib para criar o gráfico de pizza e exiba-o na aplicação Streamlit. </span>
+<span class="s2">"</span>
+<span class="s2">"""</span>
+
+<span class="c1"># Código Final</span>
+
+<span class="n">chain_of_thoughts_4</span> <span class="o">=</span> <span class="s2">"""</span>
+
+<span class="s2">### Objetivo </span>
+<span class="s2">Combinar todos os prompts em um único código funcional.</span>
+
+
+<span class="s2">Prompt: </span>
+
+<span class="s2">Combine os três prompts anteriores em um único código funcional. </span>
+<span class="s2">O código deve exibir um gráfico de pizza em uma aplicação Streamlit que mostre a </span>
+<span class="s2">proporção de falas de cada categoria de sentimento."</span>
+
+<span class="s2">"""</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [226]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">genai</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s2">"gemini-1.5-pro"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">chain_of_thoughts_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>```python
+import pandas as pd
+
+def carregar_resultados_sentimento(caminho_arquivo):
+    """
+    Lê os resultados da análise de sentimento de um arquivo CSV e retorna um DataFrame do pandas.
+
+    Args:
+        caminho_arquivo (str): O caminho para o arquivo CSV.
+
+    Returns:
+        pandas.DataFrame: Um DataFrame contendo os resultados da análise de sentimento, ou None se ocorrer um erro.
+    """
+    try:
+        df = pd.read_csv(caminho_arquivo)
+        return df
+    except FileNotFoundError:
+        print(f"Erro: Arquivo não encontrado em '{caminho_arquivo}'")
+        return None
+    except pd.errors.ParserError:  # Captura erros de parsing do pandas
+        print(f"Erro: Erro ao analisar o arquivo CSV. Verifique o formato do arquivo em '{caminho_arquivo}'")
+        return None
+    except Exception as e:
+        print(f"Erro inesperado: {e}")
+        return None
+
+# Exemplo de uso:
+caminho_dados = "./data/theSimpsons/classification.csv"
+df_sentimento = carregar_resultados_sentimento(caminho_dados)
+
+if df_sentimento is not None:
+    print(df_sentimento.head())  # Exibe as primeiras linhas do DataFrame
+    # ... continue processando o DataFrame ...
+
+```
+
+
+Este código aprimorado inclui:
+
+* **Tratamento de erros robusto:**  Ele agora inclui tratamento de exceções para `FileNotFoundError`, `pd.errors.ParserError` e uma cláusula `Exception` genérica para capturar outros erros potenciais.  Isso torna o código mais resiliente a problemas inesperados, como um arquivo corrompido ou um caminho incorreto.
+* **Mensagens de erro informativas:** As mensagens de erro agora fornecem mais contexto, incluindo o caminho do arquivo, para ajudar na depuração.
+* **Exemplo de uso claro:** O código demonstra como chamar a função e verificar se o DataFrame foi carregado com sucesso antes de prosseguir com o processamento.
+* **Documentação com docstrings:** A função agora inclui uma docstring que explica seu propósito, argumentos e valor de retorno.
+
+
+Isso garante que o código seja mais robusto, fácil de usar e entender. Ele lida com cenários em que o arquivo pode não existir ou pode estar em um formato inesperado.  Também imprime as primeiras linhas do DataFrame se o carregamento for bem-sucedido, para verificação rápida.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [227]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">genai</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s2">"gemini-1.5-pro"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">chain_of_thoughts_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>```python
+import pandas as pd
+
+# Dados de exemplo (substitua por seus dados reais)
+data = {'Sentimento': ['Positivo', 'Negativo', 'Neutro', 'Positivo', 'Negativo', 'Positivo']}
+df = pd.DataFrame(data)
+
+# Calcula a proporção de cada categoria de sentimento
+proporcoes = df['Sentimento'].value_counts(normalize=True)
+
+# Imprime as proporções
+print(proporcoes)
+
+
+# Exemplo de como formatar a saída com percentuais
+proporcoes_percentuais = proporcoes * 100
+print("\nProporções em percentual:")
+print(proporcoes_percentuais.map("{:.2f}%".format))
+
+
+#Exemplo com dados mais complexos  e lidando com possíveis erros:
+
+def calcular_proporcoes_sentimento(df, coluna_sentimento='Sentimento'):
+    """
+    Calcula a proporção de cada categoria de sentimento em um DataFrame.
+
+    Args:
+        df: O DataFrame contendo os dados de sentimento.
+        coluna_sentimento: O nome da coluna que contém as categorias de sentimento.
+
+    Returns:
+        Um pandas.Series com as proporções de cada categoria, ou None em caso de erro.
+    """
+    try:
+        proporcoes = df[coluna_sentimento].value_counts(normalize=True)
+        return proporcoes
+    except KeyError:
+        print(f"Erro: Coluna '{coluna_sentimento}' não encontrada no DataFrame.")
+        return None
+    except Exception as e:
+        print(f"Um erro ocorreu: {e}")
+        return None
+
+# Dados de exemplo (substitua por seus dados reais)
+data = {'Texto': ['Eu amo este produto!', 'Este produto é terrível.', 'Este produto é ok.', 'Eu gosto deste produto.'],
+        'Sentimento': ['Positivo', 'Negativo', 'Neutro', 'Positivo']}
+
+df = pd.DataFrame(data)
+
+proporcoes = calcular_proporcoes_sentimento(df)
+
+if proporcoes is not None:
+  print(proporcoes)
+
+  proporcoes_percentuais = proporcoes * 100
+  print("\nProporções em percentual:")
+  print(proporcoes_percentuais.map("{:.2f}%".format))
+
+#Testando o tratamento de erro:
+proporcoes_erro = calcular_proporcoes_sentimento(df, 'SentimentoNaoExistente')
+
+
+
+```
+
+
+Este código aprimorado:
+
+1. **Inclui dados de exemplo:** Facilita a execução e o teste do código.
+2. **Formata a saída como percentuais:** Torna os resultados mais legíveis.
+3.  **Lida com erros:** Usa um bloco `try-except` para capturar `KeyError` (caso a coluna especificada não exista) e outras exceções, tornando o código mais robusto.
+4. **Função mais genérica:**  Permite especificar o nome da coluna de sentimento, tornando o código reutilizável para DataFrames com nomes de colunas diferentes.
+5. **Docstrings:** Inclui uma docstring na função para explicar seu propósito, argumentos e retorno.
+6. **Exemplo de teste de erro:**  Demonstra como o código se comporta quando a coluna especificada não existe.
+
+
+Isso torna o código mais completo, robusto, legível e fácil de usar e adaptar a diferentes cenários.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [228]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">genai</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s2">"gemini-1.5-pro"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">chain_of_thoughts_3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>```python
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Dados de exemplo (substitua pelos seus dados reais)
+sentimentos = {
+    "Positivo": 30,
+    "Neutro": 50,
+    "Negativo": 20,
+}
+
+# Título da aplicação
+st.title("Análise de Sentimentos")
+
+# Cria o gráfico de pizza
+fig, ax = plt.subplots()
+ax.pie(sentimentos.values(), labels=sentimentos.keys(), autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Assegura que a pizza seja desenhada como um círculo.
+
+# Exibe o gráfico na aplicação Streamlit
+st.pyplot(fig)
+
+
+# Opcional: Exibe os dados em uma tabela
+st.subheader("Dados de Sentimentos")
+st.write(sentimentos)
+
+
+#Exemplo de como usar com dados de um dataframe pandas:
+
+import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# Dados de exemplo em um DataFrame (substitua pelos seus dados reais)
+data = {'Texto': ['Eu amo este produto!', 'Este produto é ok.', 'Eu odeio este produto.'],
+        'Sentimento': ['Positivo', 'Neutro', 'Negativo']}
+df = pd.DataFrame(data)
+
+
+st.title("Análise de Sentimentos com DataFrame")
+
+# Conta a ocorrência de cada sentimento
+sentimentos_counts = df['Sentimento'].value_counts()
+
+# Cria o gráfico de pizza
+fig, ax = plt.subplots()
+ax.pie(sentimentos_counts.values, labels=sentimentos_counts.index, autopct='%1.1f%%', startangle=90)
+ax.axis('equal') 
+
+# Exibe o gráfico no Streamlit
+st.pyplot(fig)
+
+# Exibe o DataFrame
+st.subheader("DataFrame")
+st.dataframe(df)
+
+# Exibe a contagem de sentimentos
+st.subheader("Contagem de Sentimentos")
+st.write(sentimentos_counts)
+
+
+
+
+```
+
+**Para executar a aplicação:**
+
+1.  **Instale as bibliotecas necessárias:**
+    ```bash
+    pip install streamlit matplotlib pandas
+    ```
+2.  **Salve o código** como um arquivo Python (ex: `app.py`).
+3.  **Execute o aplicativo Streamlit:**
+    ```bash
+    streamlit run app.py
+    ```
+
+**Explicação do Código:**
+
+*   **`import streamlit as st`**: Importa a biblioteca Streamlit.
+*   **`import matplotlib.pyplot as plt`**: Importa a biblioteca Matplotlib.
+*   **`sentimentos = {...}`**:  Define um dicionário com os dados de sentimentos.  **Substitua esses dados pelos seus dados reais.**
+*   **`st.title(...)`**: Define o título da aplicação.
+*   **`fig, ax = plt.subplots()`**: Cria uma figura e um eixo para o gráfico.
+*   **`ax.pie(...)`**: Cria o gráfico de pizza.
+    *   `sentimentos.values()` fornece os valores para o tamanho das fatias.
+    *   `sentimentos.keys()` fornece os rótulos das fatias.
+    *   `autopct='%1.1f%%'` formata as porcentagens.
+    *   `startangle=90` define o ângulo inicial da primeira fatia.
+*   **`ax.axis('equal')`**: Garante que o gráfico de pizza seja circular.
+*   **`st.pyplot(fig)`**: Exibe o gráfico na aplicação Streamlit.
+*   A parte com o dataframe pandas mostra como fazer o mesmo processo com dados vindos de um dataframe, que é uma forma mais comum de se trabalhar com dados em python.
+
+
+**Para usar com seus próprios dados:**
+
+1.  Substitua o dicionário `sentimentos` ou o dataframe `df`  pelos seus próprios dados.  Certifique-se de que os dados estejam no formato correto (um dicionário com categorias e valores, ou um dataframe pandas com uma coluna contendo as categorias de sentimento).
+2.  Execute o aplicativo novamente.
+
+
+Lembre-se de adaptar o código e os dados de exemplo à sua situação específica.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [229]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">genai</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"GEMINI_KEY"</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="s2">"gemini-1.5-pro"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">chain_of_thoughts_4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>```python
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dados de exemplo (substitua pelos seus dados reais)
+data = {
+    'Texto': [
+        "Este filme é incrível!",
+        "Que filme horrível!",
+        "É um filme mediano.",
+        "Eu realmente gostei deste filme.",
+        "Não gostei deste filme.",
+        "O filme foi bom.",
+        "O filme foi ruim.",
+        "Este filme é ótimo!",
+        "Este filme é péssimo!",
+        "O filme é ok."
+    ]
+}
+df = pd.DataFrame(data)
+
+# Simulação de análise de sentimento (substitua por sua própria lógica)
+def analisar_sentimento(texto):
+    if "incrível" in texto or "gostei" in texto or "ótimo" in texto or "bom" in texto:
+        return "Positivo"
+    elif "horrível" in texto or "não gostei" in texto or "péssimo" in texto or "ruim" in texto:
+        return "Negativo"
+    else:
+        return "Neutro"
+
+df['Sentimento'] = df['Texto'].apply(analisar_sentimento)
+
+
+# --- Streamlit app ---
+st.title("Análise de Sentimento")
+
+# Exibir o DataFrame
+st.write("DataFrame:")
+st.dataframe(df)
+
+# Gráfico de pizza
+sentimento_counts = df['Sentimento'].value_counts()
+fig, ax = plt.subplots()
+ax.pie(sentimento_counts, labels=sentimento_counts.index, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Equal aspect ratio garante que o gráfico de pizza seja desenhado como um círculo.
+st.pyplot(fig)
+
+
+# Exibir contagens de sentimentos
+st.write("Contagens de Sentimentos:")
+st.write(sentimento_counts)
+
+
+# Barra lateral com opções (opcional)
+st.sidebar.title("Opções")
+# Adicione aqui widgets interativos, como sliders, caixas de seleção, etc.
+
+
+```
+
+
+**Explicação e Melhorias:**
+
+1. **Combinação dos prompts:** O código integra a criação do DataFrame, a análise de sentimento e a visualização do gráfico de pizza em Streamlit em um único script.
+
+2. **Função `analisar_sentimento` mais robusta:**  Embora ainda seja um exemplo simplificado,  demonstra como você pode usar sua própria lógica para categorizar o sentimento.  Lembre-se de substituir isso por uma solução mais robusta, como um modelo pré-treinado de análise de sentimento (NLTK, spaCy, Transformers, etc.) para resultados mais precisos.
+
+3. **Visualização com Streamlit:** O código usa `st.dataframe()` para exibir o DataFrame e `st.pyplot()` para exibir o gráfico de pizza. O título e outros elementos da interface do usuário também foram adicionados.
+
+4. **Tratamento de erros:**  A adição de tratamento de erros para cenários como um conjunto de dados vazio tornaria o código mais robusto.
+
+5. **Flexibilidade:** A seção de barra lateral  sugere como você pode adicionar widgets interativos para permitir que os usuários personalizem a análise ou filtrem os dados.
+
+6. **Gráfico de Pizza aprimorado:** Inclui `ax.axis('equal')` para garantir que o gráfico seja circular,  e `autopct='%1.1f%%'` para mostrar as porcentagens com uma casa decimal.
+
+
+**Para usar este código:**
+
+1. **Instale as bibliotecas:** `pip install streamlit pandas matplotlib`
+2. **Salve o código** como um arquivo Python (por exemplo, `app.py`).
+3. **Execute o aplicativo Streamlit:** `streamlit run app.py`
+
+Lembre-se de substituir os dados de exemplo e a função de análise de sentimento simplificada por seus próprios dados e uma solução de análise de sentimento mais robusta para obter resultados significativos.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [230]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Dados de exemplo (substitua pelos seus dados reais)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Texto'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Este filme é incrível!"</span><span class="p">,</span>
+        <span class="s2">"Que filme horrível!"</span><span class="p">,</span>
+        <span class="s2">"É um filme mediano."</span><span class="p">,</span>
+        <span class="s2">"Eu realmente gostei deste filme."</span><span class="p">,</span>
+        <span class="s2">"Não gostei deste filme."</span><span class="p">,</span>
+        <span class="s2">"O filme foi bom."</span><span class="p">,</span>
+        <span class="s2">"O filme foi ruim."</span><span class="p">,</span>
+        <span class="s2">"Este filme é ótimo!"</span><span class="p">,</span>
+        <span class="s2">"Este filme é péssimo!"</span><span class="p">,</span>
+        <span class="s2">"O filme é ok."</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Simulação de análise de sentimento (substitua por sua própria lógica)</span>
+<span class="k">def</span> <span class="nf">analisar_sentimento</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s2">"incrível"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"gostei"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"ótimo"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"bom"</span> <span class="ow">in</span> <span class="n">texto</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Positivo"</span>
+    <span class="k">elif</span> <span class="s2">"horrível"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"não gostei"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"péssimo"</span> <span class="ow">in</span> <span class="n">texto</span> <span class="ow">or</span> <span class="s2">"ruim"</span> <span class="ow">in</span> <span class="n">texto</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Negativo"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Neutro"</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">'Sentimento'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Texto'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">analisar_sentimento</span><span class="p">)</span>
+
+
+<span class="c1"># --- Streamlit app ---</span>
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Análise de Sentimento"</span><span class="p">)</span>
+
+<span class="c1"># Exibir o DataFrame</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"DataFrame:"</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Gráfico de pizza</span>
+<span class="n">sentimento_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Sentimento'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sentimento_counts</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">sentimento_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">'</span><span class="si">%1.1f%%</span><span class="s1">'</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>  <span class="c1"># Equal aspect ratio garante que o gráfico de pizza seja desenhado como um círculo.</span>
+<span class="n">st</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+
+<span class="c1"># Exibir contagens de sentimentos</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Contagens de Sentimentos:"</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sentimento_counts</span><span class="p">)</span>
+
+
+<span class="c1"># Barra lateral com opções (opcional)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Opções"</span><span class="p">)</span>
+<span class="c1"># Adicione aqui widgets interativos, como sliders, caixas de seleção, etc.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>2024-11-22 20:22:48.282 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:48.320 "runner.magicEnable" is not a valid config option. If you previously had this config option set, it may have been removed.
+2024-11-22 20:22:48.321 
+  <span class="ansi-yellow-intense-fg ansi-bold">Warning:</span> to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run /Users/pedromonteiro/Library/Mobile Documents/com~apple~CloudDocs/Faculdade/promptClass/TP3/.venv/lib/python3.12/site-packages/ipykernel_launcher.py [ARGUMENTS]
+2024-11-22 20:22:48.322 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:48.323 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:48.323 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:48.323 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:48.323 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.329 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.330 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.353 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.427 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.427 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.427 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.427 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.427 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.428 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.429 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.429 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.429 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2024-11-22 20:22:50.429 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[230]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>DeltaGenerator(_root_container=1, _parent=DeltaGenerator())</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,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"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Resposta">Resposta<a class="anchor-link" href="#Resposta">¶</a></h3><p>O LLM não foi capaz de implementar a aplicação com os prompts fornecidos. A aplicação proposta por ele é funcional, todavia não foi observado o o caminho do arquivo csv a ser lido mesmo ele tendo sido especificado no prompt. Ele criou a aplicação com dados próprios inventados.</p>
+<p>O primeiro prompt teve como objetivo carregar os resultados da análise de sentimento em um DataFrame para que possamos trabalhar com os dados. O segundo, calcular a proporção de cada categoria de sentimento no DataFrame. O terceiro, criar uma aplicação Streamlit que exibe um gráfico de  pizza mostrando a proporção de falas de cada categoria de sentimento. E o quarto, combinar todos os prompts em um único código funcional.</p>
 </div>
 </div>
 </div>
