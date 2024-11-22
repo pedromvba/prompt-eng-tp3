@@ -7,3 +7,5 @@ seaborn==0.13.2
 python-dotenv==1.0.1
 tiktoken==0.8.0
 scipy==1.14.1
+rouge==1.0.1
+sacrebleu==2.4.3
